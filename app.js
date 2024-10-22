@@ -28,7 +28,7 @@ class App {
     this.app.use("/api", router);
 
     router.use("/auth", authRoutes);
-    router.use("/menu", verifyToken, menuRoutes);
+    router.use("/menu", menuRoutes);
     router.use("/users", verifyToken, userRoutes);
     router.use("/categories", verifyToken, categoryRoutes);
 

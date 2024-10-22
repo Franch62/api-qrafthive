@@ -26,8 +26,8 @@ class MenuRoutes {
   }
 
   setupRoutes() {
-    this.router.get("/", verifyToken, menuController.getMenuItems);
-    this.router.get("/:id", verifyToken, menuController.getMenuItemById);
+    this.router.get("/", menuController.getMenuItems);
+    this.router.get("/:id", menuController.getMenuItemById);
     this.router.post(
       "/",
       upload.single("image_url"),
