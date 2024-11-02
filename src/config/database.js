@@ -8,7 +8,7 @@ class Database {
   connect() {
     mongoose
       .connect(
-        "mongodb+srv://franchboy:unifeb11*@order-api.7s24z.mongodb.net/?retryWrites=true&w=majority&appName=order-api"
+        "mongodb+srv://" + process.env.DATABASE_STRING
       )
       .then(() => console.log("Connected to MongoDB"))
       .catch((err) => console.error("Could not connect to MongoDB", err));
