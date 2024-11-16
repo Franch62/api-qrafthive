@@ -46,8 +46,6 @@ const orderSchema = new mongoose.Schema({
   createdIn: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model("Order", orderSchema);
-
 class OrderModel {
   constructor() {
     this.Order = mongoose.model("Order", orderSchema);
