@@ -14,21 +14,39 @@ const paymentMethodsEnum = [
   2, // Dinheiro
 ];
 
+const deliveryOptionEnum = [
+  0, // Retirar no Local
+  1, // Entrega
+];
+
 const orderSchema = new mongoose.Schema({
+  deliveryOption: {
+    method: {
+      type: Number,
+      enum: deliveryOptionEnum,
+      default: 1,
+      required: true,
+    },
+  },
+  customer_addressCEP: { type: String },
+  customer_addressStreet: { type: String },
+  customer_addressNumber: { type: String },
+  customer_addressNeighborhood: { type: String },
   customer_name: { type: String, required: true },
   customer_phone: { type: String, required: true },
-  customer_address: { type: String, required: true },
   itens: [
     { type: mongoose.Schema.Types.ObjectId, ref: "MenuItem", required: true },
   ],
   total: { type: String, required: true },
   formPayment: {
-    method: { type: Number, enum: paymentMethodsEnum, required: true }, // Usando números agora
-    details: { type: String, required: false }, // Detalhes adicionais, se necessário
+    method: { type: Number, enum: paymentMethodsEnum, required: true },
+    details: { type: String, required: false },
   },
-  status: { type: Number, enum: orderStatusEnum, default: 1, required: true },
-  createdIn: { type: Date, default: Date.now() },
+  status: { type: Number, enum: orderStatusEnum, default: 1 },
+  createdIn: { type: Date, default: Date.now },
 });
+
+module.exports = mongoose.model("Order", orderSchema);
 
 class OrderModel {
   constructor() {

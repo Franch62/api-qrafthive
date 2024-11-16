@@ -28,6 +28,8 @@ class UserController {
     }
   }
 
+  
+
   async updateUser(req, res) {
     try {
       const updatedUser = await userModel.update(req.params.id, req.body);

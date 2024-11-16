@@ -8,7 +8,7 @@ const orderRoutes = require("./src/routes/orderRoutes");
 const userRoutes = require("./src/routes/userRoutes");
 const categoryRoutes = require("./src/routes/categoryRoutes");
 const authRoutes = require("./src/routes/authRoutes");
-const verifyToken = require('./src/middlewares/authMiddleware');
+const verifyToken = require("./src/middlewares/authMiddleware");
 
 class App {
   constructor() {
