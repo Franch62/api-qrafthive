@@ -10,8 +10,8 @@ class orderRoutes {
   }
 
   setupRoutes() {
-    this.router.get("/", verifyToken, orderController.getOrders);
-    this.router.get("/:id", verifyToken, orderController.getOrderById);
+    this.router.get("/", orderController.getOrders);
+    this.router.get("/:id", orderController.getOrderById);
     this.router.post("/", orderController.createOrder);
     this.router.put("/:id", verifyToken, orderController.updateOrder);
     this.router.delete("/:id", verifyToken, orderController.deleteOrder);

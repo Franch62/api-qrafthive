@@ -27,6 +27,7 @@ const orderSchema = new mongoose.Schema({
     { type: mongoose.Schema.Types.ObjectId, ref: "MenuItem", required: true },
   ],
   total: { type: String },
+  quantity: { type: Number },
   formPayment: {
     method: {
       type: String,
@@ -35,7 +36,6 @@ const orderSchema = new mongoose.Schema({
     },
     details: { type: String, required: false },
   },
-
   status: {
     type: String,
     enum: orderStatusEnum,
@@ -50,11 +50,11 @@ class OrderModel {
   }
 
   async getAll() {
-    return await this.Order.find();
+    return await this.Order.find().populate("itens");
   }
 
   async getById(id) {
-    return await this.Order.findOne(id);
+    return await this.Order.findOne(id).populate("itens");
   }
 
   async create(data) {
