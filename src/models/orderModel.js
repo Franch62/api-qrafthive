@@ -2,13 +2,6 @@ const mongoose = require("mongoose");
 
 const deliveryOptionEnum = ["Retirada", "Entrega"];
 // const paymentMethodsEnum = ["Cartão", "Pix", "Dinheiro"];
-const orderStatusEnum = [
-  "Aguardando pagamento",
-  "Em Andamento",
-  "Pago",
-  "Finalizado",
-  "Cancelado",
-];
 
 const orderSchema = new mongoose.Schema({
   deliveryOption: {
@@ -38,7 +31,13 @@ const orderSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: orderStatusEnum,
+    enum: [
+      "Aguardando pagamento",
+      "Em Andamento",
+      "Pago",
+      "Finalizado",
+      "Cancelado",
+    ],
     default: "Em Andamento",
   },
   createdIn: { type: Date, default: Date.now },
