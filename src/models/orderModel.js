@@ -1,32 +1,21 @@
 const mongoose = require("mongoose");
 
+const deliveryOptionEnum = ["Retirada", "Entrega"];
+// const paymentMethodsEnum = ["Cartão", "Pix", "Dinheiro"];
 const orderStatusEnum = [
-  0, // Aguardando pagamento
-  1, // Em Andamento
-  2, // Pago
-  3, // Finalizado
-  4, // Cancelado
-];
-
-const paymentMethodsEnum = [
-  0, // Cartão
-  1, // Pix
-  2, // Dinheiro
-];
-
-const deliveryOptionEnum = [
-  0, // Retirar no Local
-  1, // Entrega
+  "Aguardando pagamento",
+  "Em Andamento",
+  "Pago",
+  "Finalizado",
+  "Cancelado",
 ];
 
 const orderSchema = new mongoose.Schema({
   deliveryOption: {
-    method: {
-      type: Number,
-      enum: deliveryOptionEnum,
-      default: 1,
-      required: true,
-    },
+    type: String,
+    enum: deliveryOptionEnum,
+    default: "Entrega",
+    required: true,
   },
   customer_addressCEP: { type: String },
   customer_addressStreet: { type: String },
@@ -37,12 +26,21 @@ const orderSchema = new mongoose.Schema({
   itens: [
     { type: mongoose.Schema.Types.ObjectId, ref: "MenuItem", required: true },
   ],
-  total: { type: String, required: true },
+  total: { type: String },
   formPayment: {
-    method: { type: Number, enum: paymentMethodsEnum, required: true },
+    method: {
+      type: String,
+      enum: ["Cartão", "Pix", "Dinheiro"], // Os valores esperados
+      required: true,
+    },
     details: { type: String, required: false },
   },
-  status: { type: Number, enum: orderStatusEnum, default: 1 },
+
+  status: {
+    type: String,
+    enum: orderStatusEnum,
+    default: "Em Andamento",
+  },
   createdIn: { type: Date, default: Date.now },
 });
 
@@ -60,7 +58,14 @@ class OrderModel {
   }
 
   async create(data) {
-    const order = new this.Order(data);
+    const itens = data.products.map((product) => product._id);
+
+    const orderData = {
+      ...data,
+      itens,
+    };
+
+    const order = new this.Order(orderData);
     return await order.save();
   }
 

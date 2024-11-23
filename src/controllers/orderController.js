@@ -12,9 +12,10 @@ class OrderController {
 
   async createOrder(req, res) {
     try {
-      const Order = await orderModel.create(req.body);
-      res.send(Order);
+      const order = await orderModel.create(req.body);
+      res.send(order);
     } catch (error) {
+      console.error("Erro ao criar pedido:", error.message, error.stack);
       res.status(500).send("Erro ao criar o Pedido.");
     }
   }
