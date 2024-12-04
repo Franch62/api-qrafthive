@@ -9,8 +9,8 @@ class CategoryRoutes {
   }
 
   setupRoutes() {
-    this.router.get("/", verifyToken, categoryController.getCategories);
-    this.router.get("/:id", verifyToken, categoryController.getCategoryById);
+    this.router.get("/", categoryController.getCategories);
+    this.router.get("/:id", categoryController.getCategoryById);
     this.router.post("/", verifyToken, categoryController.createCategory);
     this.router.put("/:id", verifyToken, categoryController.updateCategory);
     this.router.delete("/:id", verifyToken, categoryController.deleteCategory);

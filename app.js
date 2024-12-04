@@ -32,7 +32,7 @@ class App {
     router.use("/menu", menuRoutes);
     router.use("/order", orderRoutes);
     router.use("/users", verifyToken, userRoutes);
-    router.use("/categories", verifyToken, categoryRoutes);
+    router.use("/categories", categoryRoutes);
 
     router.use("/uploads", express.static("uploads"));
   }
