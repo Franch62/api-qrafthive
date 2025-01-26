@@ -3,10 +3,7 @@ const cors = require("cors");
 const path = require("path");
 const jwt = require("jsonwebtoken");
 
-const menuRoutes = require("./src/routes/menuRoutes");
-const orderRoutes = require("./src/routes/orderRoutes");
 const userRoutes = require("./src/routes/userRoutes");
-const categoryRoutes = require("./src/routes/categoryRoutes");
 const authRoutes = require("./src/routes/authRoutes");
 const verifyToken = require("./src/middlewares/authMiddleware");
 
@@ -29,10 +26,7 @@ class App {
     this.app.use("/api", router);
 
     router.use("/auth", authRoutes);
-    router.use("/menu", menuRoutes);
-    router.use("/order", orderRoutes);
     router.use("/users", verifyToken, userRoutes);
-    router.use("/categories", categoryRoutes);
 
     router.use("/uploads", express.static("uploads"));
   }
