@@ -24,10 +24,8 @@ class App {
   setupRoutes() {
     const router = express.Router();
     this.app.use("/api", router);
-
     router.use("/auth", authRoutes);
     router.use("/users", verifyToken, userRoutes);
-
     router.use("/uploads", express.static("uploads"));
   }
 }

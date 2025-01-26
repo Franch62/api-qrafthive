@@ -4,12 +4,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 
-// Função de Registro
 const register = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
-    const existingUser = await UserModel.User.findOne({ email }); // Usando findOne para verificar o email
+    const existingUser = await UserModel.User.findOne({ email });
     if (existingUser) return res.status(400).json({ message: "User already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -24,7 +23,6 @@ const register = async (req, res) => {
 };
 
 
-// Função de Login
 const login = async (req, res) => {
   const { email, password } = req.body;
 
